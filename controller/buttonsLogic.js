@@ -39,5 +39,5 @@ function restartGame() {
     //resetting the hearts
     hearts = 3;    
     for (let i = 1; i <= hearts; ++i)
-        $("#hp").append('<img src = "view/heart.png" width="100" height="100" id = "heart">');
+        $("#hp").append('<img src = "../view/heart.png" width="100" height="100" id = "heart">');
 }

@@ -5,7 +5,6 @@ var buttonsCounter = 3;
 var winnerButton = Math.floor(Math.random() * buttonsCounter) + 1;
 
 function checkCorrectButton(ID) {
-    console.log(ID);
     if (ID == winnerButton) {
         ++points;
         $("#pointsCounter").text("Points: " + points);

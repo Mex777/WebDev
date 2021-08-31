@@ -33,6 +33,7 @@ function changeNumberOfButtons() {
     else if (buttonsCounter < before)
         for (var i = Number(before); i >= Number(buttonsCounter) + 1; --i) 
             $("#" + i).remove();
+    winnerButton = Math.floor(Math.random() * buttonsCounter) + 1;    
 
     return false;
 }

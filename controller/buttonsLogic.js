@@ -1,10 +1,12 @@
 var maxPoints = 0;
 var points = 0;
 var hearts = 3;
+var buttonsCounter = 3;
+var winnerButton = Math.floor(Math.random() * buttonsCounter) + 1;
 
-function buttonClicked(ID) {
-    //Checks if the clicked button is correct or wrong
-    if (ID == Math.floor(Math.random() * 3) + 1) {
+function checkCorrectButton(ID) {
+    console.log(ID);
+    if (ID == winnerButton) {
         ++points;
         $("#pointsCounter").text("Points: " + points);
         alert("CORRECT BUTTON");
@@ -12,6 +14,26 @@ function buttonClicked(ID) {
         alert("WRONG BUTTON");
         deleteHeart();
     }
+
+    winnerButton = Math.floor(Math.random() * buttonsCounter) + 1;
+    return false;
+}
+
+function changeNumberOfButtons() {
+    let before = buttonsCounter;
+    buttonsCounter = prompt("Number of buttons\n(choose a number between 1 and 99)", 3);
+    while (!(buttonsCounter > 0 && buttonsCounter < 100)) {
+        alert("Invalid input");
+        buttonsCounter = prompt("Number of buttons\n(choose a number between 1 and 99)", 3);
+    }
+
+    if (buttonsCounter > before)
+        for (var i = Number(before) + 1; i <= buttonsCounter; ++i) 
+            $("#gameButtons").append('<button type = "button" class = "btn btn-outline-success btn-lg" id = "' + i + '" onclick = "return checkCorrectButton(id)"> ' + i + ' </button>');
+    else if (buttonsCounter < before)
+        for (var i = Number(before); i >= Number(buttonsCounter) + 1; --i) 
+            $("#" + i).remove();
+
     return false;
 }
 

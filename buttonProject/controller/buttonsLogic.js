@@ -1,7 +1,7 @@
 var maxPoints = 0;
 var points = 0;
 var hearts = 3;
-var buttonsCounter = 3;
+var buttonsCounter = 0;
 var winnerButton = Math.floor(Math.random() * buttonsCounter) + 1;
 
 function checkCorrectButton(ID) {
@@ -20,10 +20,10 @@ function checkCorrectButton(ID) {
 
 function changeNumberOfButtons() {
     let before = buttonsCounter;
-    buttonsCounter = prompt("Number of buttons\n(choose a number between 1 and 99)", 3);
-    while (!(buttonsCounter > 0 && buttonsCounter < 100)) {
+    buttonsCounter = prompt("Number of buttons\n(choose a number between 2 and 99)", 3);
+    while (!(buttonsCounter > 1 && buttonsCounter < 100)) {
         alert("Invalid input");
-        buttonsCounter = prompt("Number of buttons\n(choose a number between 1 and 99)", 3);
+        buttonsCounter = prompt("Number of buttons\n(choose a number between 2 and 99)", 3);
     }
 
     if (buttonsCounter > before)
@@ -49,7 +49,7 @@ function deleteHeart() {
 
 function restartGame() {
     //updating the high score
-    if (maxPoints < points) {
+    if (maxPoints <= points) {
         maxPoints = points;
         $("#highScore").text("Your high score is: " + maxPoints);
     }
@@ -61,5 +61,5 @@ function restartGame() {
     //resetting the hearts
     hearts = 3;    
     for (let i = 1; i <= hearts; ++i)
-        $("#hp").append('<img src = "../view/heart.png" width="100" height="100" id = "heart">');
+        $("#hp").append('<img src = "../view/heart.png" width = "100" height = "100" id = "heart">');
 }

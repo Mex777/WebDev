@@ -16,7 +16,6 @@ function addWord() {
 
 function searchWord() {
     let word = document.getElementById("toBeSearched").value;
-    let found = false;
     if (word == "") {
         alert("input is empty");
         return false;

@@ -7,7 +7,7 @@ function addWord() {
         return false;
     }
 
-    if (dictionary.size == 0 || dictionary.has(word) == false) {
+    if (dictionary.has(word) == false) {
         dictionary.add(document.getElementById("word").value); 
         $("#wordList").append('<li> ' + word + ' </li>');
     } else 

@@ -19,18 +19,18 @@ function checkCorrectButton(ID) {
 }
 
 function changeNumberOfButtons() {
-    let before = buttonsCounter;
-    buttonsCounter = prompt("Number of buttons\n(choose a number between 2 and 99)", 3);
+    let before = Number(buttonsCounter);
+    buttonsCounter = Number(prompt("Number of buttons\n(choose a number between 2 and 99)", 3));
     while (!(buttonsCounter > 1 && buttonsCounter < 100)) {
         alert("Invalid input");
-        buttonsCounter = prompt("Number of buttons\n(choose a number between 2 and 99)", 3);
+        buttonsCounter = Number(prompt("Number of buttons\n(choose a number between 2 and 99)", 3));
     }
 
     if (buttonsCounter > before)
-        for (var i = Number(before) + 1; i <= buttonsCounter; ++i) 
+        for (var i = before + 1; i <= buttonsCounter; ++i) 
             $("#gameButtons").append('<button type = "button" class = "btn btn-outline-success btn-lg" id = "' + i + '" onclick = "return checkCorrectButton(id)"> ' + i + ' </button>');
     else if (buttonsCounter < before)
-        for (var i = Number(before); i >= Number(buttonsCounter) + 1; --i) 
+        for (var i = before; i >= buttonsCounter + 1; --i) 
             $("#" + i).remove();
     winnerButton = Math.floor(Math.random() * buttonsCounter) + 1;    
 

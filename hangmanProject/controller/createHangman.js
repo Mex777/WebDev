@@ -9,14 +9,34 @@ let wrongGuesses = 0;
  * @return {false}
  */
 function createGame() {
-  // adding the letters in a set
   wordToGuess = $('#wordToSearch').val();
-  for (let i = 0; i < wordToGuess.length; ++i) {
-    wantedLetters.add(wordToGuess[i]);
+
+  let validWord = true;
+  for (let i = 0; i < wordToGuess.length && validWord; ++i) {
+    validWord = validWord && isLetter(wordToGuess[i]);
   }
 
+  if (!validWord || wordToGuess == '') {
+    $('#outcome').text('INVALID INPUT');
+    $('#wordToSearch').val('');
+    return false;
+  }
+
+  for (let i = 0; i < wordToGuess.length; ++i) {
+    wantedLetters.add(wordToGuess[i]);
+    $('#lettersFound').append(
+        '<div class="col" id="' + i +
+            '" style="display: grid; ' +
+            'border-style: solid; ' +
+            'border-radius: 100px; ' +
+            'border-top: 0px">' +
+        '</div>',
+    );
+  }
+
+  $('#outcome').text('');
   $('#hangmanWordInput').remove();
-  $('#guessInput').css('opacity', '1.0');
+  $('#guessBar').css('opacity', '1.0');
   $('#hangMan').append('<img src="hangmanStates/state0.png" id="state">');
 
   return false;
@@ -40,6 +60,7 @@ function makeGuess() {
     // updates letters and the outcome on the page
     foundLetters.add(guess);
     $('#outcome').text('Correct guess');
+    updateFoundLetters(guess);
 
     // ends game if the user guessed all the letters
     if (wantedLetters.size == foundLetters.size) {
@@ -49,7 +70,7 @@ function makeGuess() {
     ++wrongGuesses;
 
     // changes the state of the hangman and updates the outcome on the page
-    $('#hangMan').html('<img src="hangmanStates/state'+ wrongGuesses +'.png">')
+    $('#hangMan').html('<img src="hangmanStates/state'+ wrongGuesses +'.png">');
     $('#outcome').text('Wrong guess');
 
     // ends game when the man is dead
@@ -88,4 +109,16 @@ function endGame(won) {
 
   $('#outcome').css('text-align', 'center');
   $('#guessBar').remove();
+}
+
+/**
+ * Updates the screen when a letter is guessed
+ * @param {character} letter to be shown on the screen
+ */
+function updateFoundLetters(letter) {
+  for (let i = 0; i < wordToGuess.length; ++i) {
+    if (letter == wordToGuess[i]) {
+      $('#' + i).text(letter.toUpperCase());
+    }
+  }
 }

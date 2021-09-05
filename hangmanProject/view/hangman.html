@@ -13,20 +13,25 @@
   <body>
     <div class="container">
       <form class="d-flex" id="hangmanWordInput">
-        <input type="text" placeholder="Word for hangman" id="wordToSearch">
+        <input type="text" placeholder="Word for hangman (only letters)" id="wordToSearch">
         <button class = "btn btn-primary" onclick="return createGame()" style="background: transparent; border: none !important;"> Add word </button>
       </form>
     </div>
 
-    <div class="container" style="opacity: 0.0;" id="guessInput">
-      <form class="d-flex" id="guessBar">
+    <div class="container">
+      <form class="d-flex" id="guessBar" style="opacity: 0.0;">
         <input type="text" placeholder="Make a guess(a letter only)" id="guess">
         <button class = "btn btn-primary" onclick="return makeGuess()" style="background: transparent; border: none !important;"></button>
       </form>
       <h3 id="outcome"></h3>
     </div>
 
-    <div class="container" id="hangMan">
+    <div class="container" id="hangMan" style="text-align: center;">
+    </div>
+
+    <div class="container">
+      <div class="row" id="lettersFound" style="text-align: center;">
+      </div>
     </div>
 
     <!-- Optional JavaScript; choose one of the two! -->

@@ -30,7 +30,7 @@ function createGame() {
         '<div class="col" id="' + i +
             '" style="display: grid; ' +
             'border-style: solid; ' +
-            'border-radius: 100px; ' +
+            'border-radius: 10px; ' +
             'border-top: 0px">' +
         '</div>',
     );

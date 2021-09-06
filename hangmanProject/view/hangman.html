@@ -10,26 +10,33 @@
     <title>Hangman</title>
   </head>
   <body>
-    <div class="center" id="hangmanWordInput">
+    <div class="container center" id="hangmanWordInput">
       <form class="d-flex">
-        <input class="center" type="text" placeholder="Word for hangman (only letters)" id="wordToSearch">
-        <button class = "btn btn-primary" onclick="return createGame()" style="opacity: 0.0;"> Add word </button>
+        <input class="center" type="text" placeholder="Word for hangman (only letters)" id="wordToSearch" style="margin-left: auto;">
+        <button class="btn btn-primary" onclick="return createGame()" style="opacity: 0.0;"> </button>
       </form>
+      <h2 id="outcome"></h2>
     </div>
 
-    <div class="center">
+    <div class="container center">
       <form class="d-flex" id="guessBar" style="opacity: 0.0;">
         <input class="center" type="text" placeholder="Make a guess(a letter only)" id="guess">
-        <button class = "btn btn-primary" onclick="return makeGuess()" style="opacity: 0.0;"></button>
+        <button class="btn btn-primary" onclick="return makeGuess()" style="opacity: 0.0;"></button>
       </form>
-      <h5 id="outcome"></h5>
+      <h2 id="outcome"></h2>
     </div>
 
-    <div class="container" id="hangMan"></div>
-
+    <div>
+      <br>
+      <br>
+      <br>
+    </div>
+    
     <div class="container">
       <div class="row" id="lettersFound" style="text-align: center;"></div>
     </div>
+
+    <div class="container" id="hangMan"></div>
 
     <!-- Optional JavaScript; choose one of the two! -->
     <script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

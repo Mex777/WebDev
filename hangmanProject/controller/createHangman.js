@@ -10,14 +10,7 @@ let wrongGuesses = 0;
  */
 function createGame() {
   const input = document.getElementById('wordToSearch').value;
-
-  // checks if the word is made from letters only
-  let validWord = true;
-  for (let i = 0; i < input.length && validWord; ++i) {
-    validWord = validWord && isLetter(input[i]);
-  }
-
-  if (!validWord || input == '') {
+  if (!validWord(input)) {
     document.getElementById('outcome').innerHTML = 'INVALID INPUT';
     document.getElementById('wordToSearch').value = '';
     return false;
@@ -104,6 +97,21 @@ function isLetter(inp) {
     return false;
   }
   return (inp >= 'a' && inp <= 'z') || (inp >= 'A' && inp <= 'Z');
+}
+
+/**
+ * Checks if the word from the user has letters only
+ * @param {string} input from the user
+ * @return {boolean} true if the word is made of letters only, false otherwise
+ */
+function validWord(input) {
+  for (let i = 0; i < input.length; ++i) {
+    if (!isLetter(input[i])) {
+      return false;
+    }
+  }
+
+  return input != '';
 }
 
 /**

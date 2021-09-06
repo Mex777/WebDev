@@ -9,38 +9,38 @@ let wrongGuesses = 0;
  * @return {false}
  */
 function createGame() {
-  wordToGuess = $('#wordToSearch').val();
+  const input = document.getElementById('wordToSearch').value;
 
   // checks if the word is made from letters only
   let validWord = true;
-  for (let i = 0; i < wordToGuess.length && validWord; ++i) {
-    validWord = validWord && isLetter(wordToGuess[i]);
+  for (let i = 0; i < input.length && validWord; ++i) {
+    validWord = validWord && isLetter(input[i]);
   }
 
-  if (!validWord || wordToGuess == '') {
-    $('#outcome').text('INVALID INPUT');
-    $('#wordToSearch').val('');
+  if (!validWord || input == '') {
+    document.getElementById('outcome').innerHTML = 'INVALID INPUT';
+    document.getElementById('wordToSearch').value = '';
     return false;
   }
 
   // creates the places for the letters on the screen
+  wordToGuess = input.toUpperCase();
   for (let i = 0; i < wordToGuess.length; ++i) {
-    wantedLetters.add(wordToGuess[i].toUpperCase());
-    $('#lettersFound').append(
-        '<div class="col" id="' + i +
-            '" style="display: grid; ' +
-            'border-style: solid; ' +
-            'border-radius: 10px; ' +
-            'border-top: 0px">' +
-        '</div>',
-    );
+    wantedLetters.add(wordToGuess[i]);
+    const node = document.createElement('div');
+    document.getElementById('lettersFound').appendChild(node);
+    document.getElementById('lettersFound').
+        getElementsByTagName('div')[i].className = 'col letters';
   }
 
   // draws the visuals of the game
-  $('#outcome').text('');
-  $('#hangmanWordInput').remove();
-  $('#guessBar').css('opacity', '1.0');
-  $('#hangMan').append('<img src="hangmanStates/state0.png" id="state">');
+  document.getElementById('outcome').innerHTML = '';
+  document.getElementById('hangmanWordInput').remove();
+  document.getElementById('guessBar').style.opacity = '1.0';
+  // draws the image
+  const imgLocation = 'hangmanStates/state0.png';
+  document.getElementById('hangMan').appendChild(document.createElement('img'));
+  document.getElementsByTagName('img')[0].src = imgLocation;
 
   return false;
 }
@@ -50,12 +50,12 @@ function createGame() {
  * @return {false}
  */
 function makeGuess() {
-  const guess = $('#guess').val();
-  $('#guess').val('');
+  const guess = document.getElementById('guess').value;
+  document.getElementById('guess').value = '';
 
   // checks whether the guess from the user is a letter
   if (!isLetter(guess)) {
-    $('#outcome').text('Not letter. Try again!');
+    document.getElementById('outcome').innerHTML = 'Not letter! Try again!';
     return false;
   }
 
@@ -63,12 +63,13 @@ function makeGuess() {
   if (wantedLetters.has(letter) && !foundLetters.has(letter)) {
     // updates letters inside the set and the outcome on the page
     foundLetters.add(letter);
-    $('#outcome').text('Correct guess');
+    document.getElementById('outcome').innerHTML = 'Correct guess!';
 
     // updates the letters on the screen.
     for (let i = 0; i < wordToGuess.length; ++i) {
-      if (letter == wordToGuess[i].toUpperCase()) {
-        $('#' + i).text(letter.toUpperCase());
+      if (letter == wordToGuess[i]) {
+        document.getElementById('lettersFound').
+            getElementsByTagName('div')[i].innerHTML = letter;
       }
     }
 
@@ -80,8 +81,9 @@ function makeGuess() {
     ++wrongGuesses;
 
     // changes the state of the hangman and updates the outcome on the page
-    $('#hangMan').html('<img src="hangmanStates/state'+ wrongGuesses +'.png">');
-    $('#outcome').text('Wrong guess');
+    document.getElementsByTagName('img')[0].src =
+        'hangmanStates/state' + wrongGuesses + '.png';
+    document.getElementById('outcome').innerHTML = 'Wrong guess';
 
     // ends game when the man is dead
     if (wrongGuesses == 6) {
@@ -110,13 +112,13 @@ function isLetter(inp) {
  */
 function endGame(won) {
   if (won) {
-    $('#outcome').text('Game Over!\nYou won!');
-    $('#outcome').css('color', 'green');
+    document.getElementById('outcome').innerHTML = 'Game Over!\nYou won!';
+    document.getElementById('outcome').style.color = 'green';
   } else {
-    $('#outcome').text('Game Over!\nYou lost!');
-    $('#outcome').css('color', 'red');
+    document.getElementById('outcome').innerHTML = 'Game Over!\nYou lost!';
+    document.getElementById('outcome').style.color = 'red';
   }
 
-  $('#outcome').css('text-align', 'center');
-  $('#guessBar').remove();
+  document.getElementById('guessBar').remove();
+  document.getElementById('outcome').style.className = 'center';
 }
